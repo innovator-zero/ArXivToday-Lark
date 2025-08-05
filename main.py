@@ -36,6 +36,7 @@ def task():
 
     # Deduplicate papers across categories
     papers = deduplicate_papers_across_categories(papers)
+    print('Deduplicated papers across categories: {}'.format(len(papers)))
 
     if keyword_list:
         papers = filter_papers_by_keyword(papers, keyword_list)
