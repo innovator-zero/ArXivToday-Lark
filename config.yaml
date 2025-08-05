@@ -50,6 +50,9 @@ keyword_list:  # Keywords to filter papers
   - hallucination
   - privacy
   - intellectual property
+  - vulnerability
+  - vulnerabilities
+  - poison
   - victim
 
 # Use LLM for More Accurate Paper Filtering

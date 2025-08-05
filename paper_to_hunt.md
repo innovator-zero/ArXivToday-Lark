@@ -1,4 +1,4 @@
-我正在寻找关于 **大语言模型** (Large Language Model, LLM) **安全** 的相关论文，特别关注以下方面：
+我正在寻找关于 **大语言模型** (Large Language Model, LLM) **安全** 的相关论文，特别关注以下方面（**包括但不限于**）：
 - LLM 的安全性（safety）和安全保障（security）机制
 - 针对 LLM 的越狱攻击（Jailbreak Attack）方法及其防御对策
 - 针对 LLM 的对抗攻击（Adversarial Attack）方法及其防御对策
@@ -14,6 +14,10 @@
 - 对抗样本生成及其在LLM安全中的应用
 - LLM 的幻觉（Hallucination）问题及缓解方法
 - 针对 **多模态大模型** （Multi-Modal, Vision-Language Model）的 安全性 相关的工作
+- LLM 及其应用系统的安全，包括但不限于以下内容
+    - 检索增强生成系统（Retrieval-Augmented Generation, RAG）的安全
+    - 智能体（Agent）安全
+    - LLM 调用外部工具的安全，如模型上下文协议（Model Context Protocol, MCP）的安全
 - LLM for Safety / Security
 
 相关研究可能包括但不限于：攻击方法分析、安全防御机制设计、有害输出过滤技术、模型对齐与安全训练方法、风险评估方法等。
