@@ -30,7 +30,7 @@ def post_to_lark_webhook(tag: str, papers: list, config: dict):
             "title": paper['title'],
             "id": paper['id'],
             "abstract": paper['abstract'],
-            "zh_abstract": paper['zh_abstract'],
+            "zh_abstract": paper.get('zh_abstract', None),
             "url": paper['url'],
             "published": paper['published']
         }

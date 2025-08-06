@@ -15,6 +15,7 @@ tag = config['tag']
 category_list = config['category_list']
 keyword_list = config['keyword_list']
 use_llm_for_filtering = config['use_llm_for_filtering']
+use_llm_for_translation = config['use_llm_for_translation']
 
 paper_file = os.path.join(os.path.dirname(__file__), 'papers.json')
 if use_llm_for_filtering:
@@ -49,8 +50,9 @@ def task():
     papers = deduplicate_papers(papers, paper_file)
     print('Deduplicated papers: {}'.format(len(papers)))
 
-    papers = translate_abstracts(papers, config)
-    print('Translated Abstracts into Chinese')
+    if use_llm_for_translation:
+        papers = translate_abstracts(papers, config)
+        print('Translated Abstracts into Chinese')
 
     prepend_to_json_file(paper_file, papers)
 
