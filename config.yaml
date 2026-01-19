@@ -9,7 +9,7 @@ webhook_url: 'https://open.feishu.cn/open-apis/bot/v2/hook/XXXXX'  # TODO: Chang
 webhook_secret: ''  # TODO: Set your webhook secret (leave empty if not using signature verification)
 
 # Feishu(Lark) Card Template
-template_id: 'ArXivToday.card'  # TODO: Change to your template_id
+template_id: 'AAqvviR04LVoF'  # TODO: Change to your template_id
 template_version_name: '1.0.0'  # TODO: Change to your template_version_name
 # ------------------------------------------------------------------------------------------------------------ #
 
