@@ -4,7 +4,7 @@ Main Script
 
 import os
 import datetime
-from arxiv_paper import get_latest_papers, deduplicate_papers_across_categories, filter_papers_by_keyword, filter_papers_using_llm, deduplicate_papers, prepend_to_json_file, translate_abstracts
+from arxiv_paper import get_latest_papers, deduplicate_papers_across_categories, filter_papers_using_llm, deduplicate_papers, prepend_to_json_file, translate_abstracts
 from lark_post import post_to_lark_webhook
 from utils import load_config
 
@@ -13,7 +13,6 @@ from utils import load_config
 config = load_config()
 tag = config['tag']
 category_list = config['category_list']
-keyword_list = config['keyword_list']
 use_llm_for_filtering = config['use_llm_for_filtering']
 use_llm_for_translation = config['use_llm_for_translation']
 
@@ -38,10 +37,6 @@ def task():
     # Deduplicate papers across categories
     papers = deduplicate_papers_across_categories(papers)
     print('Deduplicated papers across categories: {}'.format(len(papers)))
-
-    if keyword_list:
-        papers = filter_papers_by_keyword(papers, keyword_list)
-    print('Filtered papers by Keyword: {}'.format(len(papers)))
 
     if use_llm_for_filtering:
         papers = filter_papers_using_llm(papers, paper_to_hunt, config)

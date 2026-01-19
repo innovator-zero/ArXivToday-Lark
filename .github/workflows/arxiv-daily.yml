@@ -1,0 +1,77 @@
+name: ArXiv Daily Paper Fetch
+
+on:
+  schedule:
+    # Run at 12:00 PM Beijing time (UTC+8) = 04:00 UTC, Monday to Friday
+    - cron: '0 4 * * 1-5'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  fetch-and-post:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Update config.yaml with secrets and variables
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
+          MODEL: ${{ vars.MODEL }}
+          BASE_URL: ${{ vars.BASE_URL }}
+          API_KEY: ${{ secrets.API_KEY }}
+        run: |
+          python << 'EOF'
+          import yaml
+          import os
+          
+          # Load existing config.yaml
+          with open('config.yaml', 'r', encoding='utf-8') as f:
+              config = yaml.safe_load(f)
+          
+          # Override only specific fields from secrets and variables
+          if os.environ.get('WEBHOOK_URL'):
+              config['webhook_url'] = os.environ.get('WEBHOOK_URL')
+          
+          if os.environ.get('WEBHOOK_SECRET'):
+              config['webhook_secret'] = os.environ.get('WEBHOOK_SECRET')
+          
+          if os.environ.get('MODEL'):
+              config['model'] = os.environ.get('MODEL')
+          
+          if os.environ.get('BASE_URL'):
+              config['base_url'] = os.environ.get('BASE_URL')
+          
+          if os.environ.get('API_KEY'):
+              config['api_key'] = os.environ.get('API_KEY')
+          
+          # Write updated config back
+          with open('config.yaml', 'w', encoding='utf-8') as f:
+              yaml.dump(config, f, allow_unicode=True, default_flow_style=False, sort_keys=False)
+          
+          print("Config file updated successfully")
+          EOF
+
+      - name: Run ArXiv paper fetch and post
+        run: |
+          python main.py
+
+      - name: Upload papers.json as artifact (optional)
+        if: always()
+        uses: actions/upload-artifact@v4
+        continue-on-error: true
+        with:
+          name: papers-json
+          path: papers.json
+          retention-days: 7

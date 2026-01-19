@@ -1,23 +1,41 @@
-我正在寻找关于 **大语言模型** (Large Language Model, LLM) **安全** 的相关论文，特别关注以下方面（**包括但不限于**）：
-- LLM 的安全性（safety）和安全保障（security）机制
-- 针对 LLM 的越狱攻击（Jailbreak Attack）方法及其防御对策
-- 针对 LLM 的对抗攻击（Adversarial Attack）方法及其防御对策
-- LLM 生成内容的安全性（Content Moderation）以及内容安全护栏（Guard）
-- LLM 的安全对齐和价值观对齐（Alignment）
-- LLM 生成内容安全性的可解释性研究
-- 安全评估框架和基准测试（Benchmark）
-- LLM 中的后门（Backdoor）植入及检测
-- 隐私保护和数据安全相关研究
-    - 隐私保护的 LLM 推理（Privacy-Preserving Inference）
-    - 针对 LLM 的成员推断攻击（Membership Inference Attack, MIA）及其防御对策
-    - LLM 模型的知识产权（Intellectual Property）保护，如模型水印（Watermark）、模型指纹（Fingerprint）等
-- 对抗样本生成及其在LLM安全中的应用
-- LLM 的幻觉（Hallucination）问题及缓解方法
-- 针对 **多模态大模型** （Multi-Modal, Vision-Language Model）的 安全性 相关的工作
-- LLM 及其应用系统的安全，包括但不限于以下内容
-    - 检索增强生成系统（Retrieval-Augmented Generation, RAG）的安全
-    - 智能体（Agent）安全
-    - LLM 调用外部工具的安全，如模型上下文协议（Model Context Protocol, MCP）的安全
-- LLM for Safety / Security
+我正在寻找关于 **具身智能** (Embodied AI) 领域中 **视觉-语言-动作模型** (VLA) 与 **机器人操控** (Manipulation) 相关的论文。重点关注以下研究方向（**包括但不限于**）：
 
-相关研究可能包括但不限于：攻击方法分析、安全防御机制设计、有害输出过滤技术、模型对齐与安全训练方法、风险评估方法等。
+## VLA 模型与基础模型 (Foundation Models for Robotics)
+
+- 视觉-语言-动作（VLA）大模型的架构设计
+- 预训练基础模型在具身任务中的迁移与应用
+
+## 机器人操控 (Manipulation) 核心技术
+
+- 精细操作、双手协同、长程任务规划（Long-horizon tasks）
+- 基于视觉或触觉反馈的闭环操控策略
+
+## 学习方法与后训练 (Learning & Post-training)
+
+- **强化学习 (RL)**：包括离线强化学习 (Offline RL)、在线微调及高效采样策略
+- **后训练技术 (Post-train)**：如针对动作策略的指令微调 (SFT)、人类反馈强化学习 (RLHF) 或自监督对齐
+
+## 数据驱动与基础设施
+
+- **大规模数据集 (Dataset)**：跨机器人、跨场景的动作数据集
+- **人类数据 (Human Data)**：通过遥操作 (Teleoperation)、VR 或人类视频学习 (Learning from Demonstration) 获取的数据
+- **仿真环境 (Simulation)**：高保真物理仿真、Sim-to-Real 迁移、自动合成数据技术
+
+## 生成式模型与世界模型
+
+- **世界模型 (World Model)**：用于预测环境变化和物理演化的动力学模型
+- **视频模型 (Video Model)**：利用视频生成模型（如 Diffusion/Transformer）进行动作预测或数据增强
+
+## 系统优化与效率 (Efficient Methods)
+
+- 具身模型的量化、剪枝及实时推理优化
+- 高效的微调方法（如 LoRA, Adapter）在机器人上的应用
+
+## 多任务融合与协同 (Hybrid Tasks)
+
+- **Manipulation + Locomotion**：全身协同控制（Whole-body control）
+- **Manipulation + Navigation**：移动操控（Mobile Manipulation），即机器人在导航过程中的交互与操作
+
+---
+
+相关研究可能包括但不限于：新的算法架构、训练范式、基准测试 (Benchmark)、硬件适配方案以及提升泛化性/鲁棒性的实验研究。

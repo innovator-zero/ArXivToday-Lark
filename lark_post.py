@@ -4,8 +4,22 @@ HTTP POST request to Lark Webhook API
 
 import json
 import datetime
+import time
+import hashlib
+import base64
+import hmac
 import requests
 
+
+def gen_sign(timestamp, secret):
+    # 拼接timestamp和secret
+    string_to_sign = '{}\n{}'.format(timestamp, secret)
+    hmac_code = hmac.new(string_to_sign.encode("utf-8"), digestmod=hashlib.sha256).digest()
+    
+    # 对结果进行base64处理
+    sign = base64.b64encode(hmac_code).decode('utf-8')
+    
+    return sign
 
 def post_to_lark_webhook(tag: str, papers: list, config: dict):
     headers = {
@@ -56,6 +70,13 @@ def post_to_lark_webhook(tag: str, papers: list, config: dict):
         "msg_type": "interactive",
         "card": card_data
     }
+
+    # Add signature if secret is provided
+    if config.get('webhook_secret'):
+        timestamp = str(int(time.time()))
+        sign = gen_sign(timestamp, config['webhook_secret'])
+        data['timestamp'] = timestamp
+        data['sign'] = sign
 
     # Send HTTP POST request
     response = requests.post(config['webhook_url'], headers=headers, data=json.dumps(data))
